@@ -7,13 +7,10 @@ using Com.Moonlay.NetCore.Lib;
 using IdentityServer4.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
@@ -40,7 +37,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                 item.Role = null;
                 EntityExtension.FlagForCreate(item, IdentityService.Username, UserAgent);
             }
-            model.Password = model.Password.Sha256();
+            model.Password = SHA1Encrypt.Hash(model.Password);
             DbSet.Add(model);
 
             return await DbContext.SaveChangesAsync();
@@ -127,7 +124,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
 
             data.Username = model.Username;
             if (!string.IsNullOrEmpty(model.Password))
-                data.Password = model.Password.Sha256();
+                data.Password = SHA1Encrypt.Hash(model.Password);
             data.IsLocked = model.IsLocked;
             data.AccountProfile.Dob = model.AccountProfile.Dob;
             data.AccountProfile.Email = model.AccountProfile.Email;
@@ -182,7 +179,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                             .Include(x => x.AccountRoles)
                                 .ThenInclude(i => i.Role)
                                 .ThenInclude(y => y.Permissions)
-                            .SingleOrDefaultAsync(d => d.Username.Equals(username) && d.Password.Equals(password.Sha256()) && !d.IsDeleted);
+                            .SingleOrDefaultAsync(d => d.Username.Equals(username) && d.Password.Equals(SHA1Encrypt.Hash(password), StringComparison.OrdinalIgnoreCase) && !d.IsDeleted);
 
                 return user;
             }
