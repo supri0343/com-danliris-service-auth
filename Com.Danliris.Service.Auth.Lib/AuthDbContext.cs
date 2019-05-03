@@ -30,6 +30,7 @@ namespace Com.Danliris.Service.Auth.Lib
             modelBuilder.ApplyConfiguration<AccountProfile>(new AccountProfileConfig());
             modelBuilder.ApplyConfiguration<Permission>(new PermissionConfig());
             modelBuilder.ApplyConfiguration<Role>(new RoleConfig());
+            modelBuilder.ApplyConfiguration<AccountRole>(new AccountRoleConfig());
         }
     }
 }

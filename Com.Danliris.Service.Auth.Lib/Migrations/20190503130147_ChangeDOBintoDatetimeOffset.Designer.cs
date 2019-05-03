@@ -4,14 +4,16 @@ using Com.Danliris.Service.Auth.Lib;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Com.Danliris.Service.Auth.Lib.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190503130147_ChangeDOBintoDatetimeOffset")]
+    partial class ChangeDOBintoDatetimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,11 +187,7 @@ namespace Com.Danliris.Service.Auth.Lib.Migrations
 
                     b.Property<int>("RoleId");
 
-                    b.Property<string>("RoleUId")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("UId")
-                        .HasMaxLength(255);
+                    b.Property<string>("UId");
 
                     b.HasKey("Id");
 

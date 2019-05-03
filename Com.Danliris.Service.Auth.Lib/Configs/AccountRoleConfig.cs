@@ -11,6 +11,7 @@ namespace Com.Danliris.Service.Auth.Lib.Configs
     {
         public void Configure(EntityTypeBuilder<AccountRole> builder)
         {
+            builder.Property(p => p.RoleUId).HasMaxLength(255);
             builder.Property(p => p.UId).HasMaxLength(255);
         }
     }

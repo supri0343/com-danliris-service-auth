@@ -11,7 +11,7 @@ namespace Com.Danliris.Service.Auth.Lib.Models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Gender { get; set; }
-        public DateTime? Dob { get; set; }
+        public DateTimeOffset? Dob { get; set; }
         public string Email { get; set; }
 
         public int AccountId { get; set; }

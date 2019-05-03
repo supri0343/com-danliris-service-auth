@@ -12,7 +12,7 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string gender { get; set; }
-        public DateTime? dob { get; set; }
+        public DateTimeOffset? dob { get; set; }
         public string email { get; set; }
         
     }
