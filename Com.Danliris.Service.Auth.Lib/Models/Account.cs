@@ -15,6 +15,8 @@ namespace Com.Danliris.Service.Auth.Lib.Models
         public virtual AccountProfile AccountProfile { get; set; }
         public virtual ICollection<AccountRole> AccountRoles { get; set; }
 
+        public string UId { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
 

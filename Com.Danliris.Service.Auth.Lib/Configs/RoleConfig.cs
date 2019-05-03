@@ -14,6 +14,7 @@ namespace Com.Danliris.Service.Auth.Lib.Configs
             builder.Property(p => p.Code).HasMaxLength(255);
             builder.Property(p => p.Name).HasMaxLength(255);
             builder.Property(p => p.Description).HasMaxLength(3000);
+            builder.Property(p => p.UId).HasMaxLength(255);
 
             builder
                 .HasMany(p => p.Permissions)

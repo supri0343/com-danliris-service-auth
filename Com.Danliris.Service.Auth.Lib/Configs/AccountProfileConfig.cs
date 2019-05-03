@@ -13,6 +13,7 @@ namespace Com.Danliris.Service.Auth.Lib.Configs
         {
             builder.Property(p => p.Firstname).HasMaxLength(255);
             builder.Property(p => p.Lastname).HasMaxLength(255);
+            builder.Property(p => p.UId).HasMaxLength(255);
             builder.Property(p => p.Gender).HasMaxLength(6);
         }
     }

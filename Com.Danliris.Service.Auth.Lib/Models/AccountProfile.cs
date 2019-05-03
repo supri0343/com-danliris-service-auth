@@ -17,6 +17,8 @@ namespace Com.Danliris.Service.Auth.Lib.Models
         public int AccountId { get; set; }
         public virtual Account Account { get; set; }
 
+        public string UId { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             return new List<ValidationResult>();

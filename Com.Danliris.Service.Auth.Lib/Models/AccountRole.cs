@@ -13,6 +13,8 @@ namespace Com.Danliris.Service.Auth.Lib.Models
         public int RoleId { get; set; }
         public virtual Role Role { get; set; }
 
+        public string UId { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             return new List<ValidationResult>();

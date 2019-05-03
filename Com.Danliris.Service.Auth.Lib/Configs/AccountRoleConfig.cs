@@ -7,14 +7,11 @@ using System.Text;
 
 namespace Com.Danliris.Service.Auth.Lib.Configs
 {
-    public class PermissionConfig : IEntityTypeConfiguration<Permission>
+    public class AccountRoleConfig : IEntityTypeConfiguration<AccountRole>
     {
-        public void Configure(EntityTypeBuilder<Permission> builder)
+        public void Configure(EntityTypeBuilder<AccountRole> builder)
         {
-            builder.Property(p => p.Unit).HasMaxLength(255);
-            builder.Property(p => p.UnitCode).HasMaxLength(255);
             builder.Property(p => p.UId).HasMaxLength(255);
-            builder.Property(p => p.Division).HasMaxLength(255);
         }
     }
 }
