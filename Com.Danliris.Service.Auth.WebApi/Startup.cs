@@ -40,6 +40,7 @@ namespace Com.Danliris.Service.Auth.WebApi
                 .AddScoped<IdentityService>()
                 .AddScoped<ValidateService>()
                 .AddScoped<IIdentityService, IdentityService>()
+                .AddScoped<ISecret, Secret>()
                 .AddScoped<IValidateService, ValidateService>();
 
         }
@@ -55,6 +56,8 @@ namespace Com.Danliris.Service.Auth.WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+
             string connectionString = Configuration.GetConnectionString(Constant.DEFAULT_CONNECTION) ?? Configuration[Constant.DEFAULT_CONNECTION];
             string env = Configuration.GetValue<string>(Constant.ASPNETCORE_ENVIRONMENT);
             services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString, c => c.CommandTimeout(120)));
@@ -70,7 +73,7 @@ namespace Com.Danliris.Service.Auth.WebApi
 
 
             #region Authentication
-            string Secret = Configuration.GetValue<string>(Constant.SECRET) ?? Configuration[Constant.SECRET];
+            string Secret = new Secret(Configuration).SecretString;
             SymmetricSecurityKey Key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret));
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)

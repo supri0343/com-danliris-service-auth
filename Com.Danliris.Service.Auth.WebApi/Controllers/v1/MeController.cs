@@ -17,7 +17,6 @@ namespace Com.Danliris.Service.Auth.WebApi.Controllers.v1
     public class MeController : Controller
     {
         public static readonly string ApiVersion = "1.0.0";
-        public IIdentityService IdentityService;
 
         public MeController()
         {

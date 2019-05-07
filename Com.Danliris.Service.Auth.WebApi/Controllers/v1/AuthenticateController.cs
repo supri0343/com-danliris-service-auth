@@ -25,12 +25,13 @@ namespace Com.Danliris.Service.Auth.WebApi.Controllers.v1
         public readonly IAccountService _accountService;
         public readonly IMapper Mapper;
         public IConfiguration Configuration { get; }
+        public static string Secret;
 
-        public AuthenticateController(IAccountService accountService, IMapper mapper, IConfiguration configuration)
+        public AuthenticateController(IAccountService accountService, IMapper mapper, ISecret secret)
         {
+            Secret = secret.SecretString;
             Mapper = mapper;
             _accountService = accountService;
-            Configuration = configuration;
         }
 
         [HttpPost]
@@ -50,8 +51,7 @@ namespace Com.Danliris.Service.Auth.WebApi.Controllers.v1
                 else
                 {
                     AccountViewModel viewModel = Mapper.Map<AccountViewModel>(account);
-
-                    string Secret = Configuration.GetValue<string>(Constant.SECRET) ?? Configuration[Constant.SECRET];
+                    
                     SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret));
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
