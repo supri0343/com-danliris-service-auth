@@ -4,7 +4,7 @@ using Com.Moonlay.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
-namespace Com.Danliris.Service.Auth.Test.DataUtils
+namespace Com.Danliris.Service.Auth.Test.Utils
 {
     public abstract class BaseDataUtil<TModel, TViewModel, TService>
         where TModel : StandardEntity, IValidatableObject, new()

@@ -1,9 +1,7 @@
 ﻿using Com.Danliris.Service.Auth.Lib.Utilities.BaseClass;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 
 namespace Com.Danliris.Service.Auth.Lib.ViewModels
 {
@@ -28,30 +26,33 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
             if (this.profile == null || string.IsNullOrWhiteSpace(this.profile.firstname))
                 yield return new ValidationResult("{ firstname: 'First Name is required' }", new List<string> { "profile" });
 
-
-            if (roles.GroupBy(x => x._id).Any(x => x.Count() > 1))
-            {
-                yield return new ValidationResult("{ roles: 'Cannot have duplicate role' }", new List<string> { "roles" });
-            }
-
             string accountRoleError = "[";
-
-
-            foreach (RoleViewModel role in roles)
+            if (roles != null)
             {
-                if (role._id.Equals(0))
+                if (roles.GroupBy(x => x._id).Any(x => x.Count() > 1))
                 {
-                    Count++;
-                    accountRoleError += "{ name: 'Role is required' }, ";
+                    yield return new ValidationResult("{ roles: 'Cannot have duplicate role' }", new List<string> { "roles" });
                 }
-                else
+
+
+
+                foreach (RoleViewModel role in roles)
                 {
-                    accountRoleError += "{}, ";
+                    if (role._id.Equals(0))
+                    {
+                        Count++;
+                        accountRoleError += "{ name: 'Role is required' }, ";
+                    }
+                    else
+                    {
+                        accountRoleError += "{}, ";
+                    }
                 }
+
+
             }
-
             accountRoleError += "]";
-
+            
             if (Count > 0)
             {
                 yield return new ValidationResult(accountRoleError, new List<string> { "roles" });

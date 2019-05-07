@@ -25,18 +25,22 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
 
             string permissionError = "[";
 
-            foreach (PermissionViewModel permission in permissions)
+            if(permissions != null)
             {
-                if (string.IsNullOrWhiteSpace(permission.unit.name))
+                foreach (PermissionViewModel permission in permissions)
                 {
-                    Count++;
-                    permissionError += "{ unit: 'Unit is required' }, ";
-                }
-                else
-                {
-                    permissionError += "{}, ";
+                    if (string.IsNullOrWhiteSpace(permission.unit.name))
+                    {
+                        Count++;
+                        permissionError += "{ unit: 'Unit is required' }, ";
+                    }
+                    else
+                    {
+                        permissionError += "{}, ";
+                    }
                 }
             }
+            
 
             permissionError += "]";
 
