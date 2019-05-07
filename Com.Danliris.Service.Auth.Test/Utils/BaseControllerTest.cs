@@ -35,12 +35,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         {
             get { return new TViewModel(); }
         }
-
-        protected List<TViewModel> Models
-        {
-            get { return new List<TViewModel>(); }
-        }
-
+        
         protected List<TViewModel> ViewModels
         {
             get { return new List<TViewModel>(); }
