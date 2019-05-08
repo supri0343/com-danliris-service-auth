@@ -51,12 +51,12 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                         permission = 1,
                         unit = new UnitViewModel()
                         {
-                            _id = 1,
-                            name = "name",
-                            code = "code",
-                            division = new DivisionViewModel()
+                            Id = 1,
+                            Name = "name",
+                            Code = "code",
+                            Division = new DivisionViewModel()
                             {
-                                name = "divName"
+                                Name = "divName"
                             }
                         }
                     }

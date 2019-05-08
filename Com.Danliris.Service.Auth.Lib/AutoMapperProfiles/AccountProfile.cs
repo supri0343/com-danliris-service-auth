@@ -31,10 +31,10 @@ namespace Com.Danliris.Service.Auth.Lib.AutoMapperProfiles
                 .ForPath(d => d.id, opt => opt.MapFrom(s => s.Id))
                 .ForPath(d => d.permission, opt => opt.MapFrom(s => s.permission))
                 .ForPath(d => d.roleId, opt => opt.MapFrom(s => s.RoleId))
-                .ForPath(d => d.unit.code, opt => opt.MapFrom(s => s.UnitCode))
-                .ForPath(d => d.unit.name, opt => opt.MapFrom(s => s.Unit))
-                .ForPath(d => d.unit._id, opt => opt.MapFrom(s => s.UnitId))
-                .ForPath(d => d.unit.division.name, opt => opt.MapFrom(s => s.Division))
+                .ForPath(d => d.unit.Code, opt => opt.MapFrom(s => s.UnitCode))
+                .ForPath(d => d.unit.Name, opt => opt.MapFrom(s => s.Unit))
+                .ForPath(d => d.unit.Id, opt => opt.MapFrom(s => s.UnitId))
+                .ForPath(d => d.unit.Division.Name, opt => opt.MapFrom(s => s.Division))
                 .ReverseMap();
 
             CreateMap<Account, AccountViewModel>()

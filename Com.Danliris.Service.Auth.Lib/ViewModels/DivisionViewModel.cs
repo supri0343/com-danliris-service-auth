@@ -6,6 +6,6 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
 {
     public class DivisionViewModel
     {
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 }
