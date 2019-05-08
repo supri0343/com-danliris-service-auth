@@ -70,11 +70,17 @@ namespace Com.Danliris.Service.Auth.Test.Utils
             return dataUtil;
         }
 
+        protected TService GetService(IServiceProvider serviceProvider, AuthDbContext dbContext)
+        {
+            TService service = (TService)Activator.CreateInstance(typeof(TService), serviceProvider, dbContext);
+
+            return service;
+        }
+
         [Fact]
         public async void Should_Success_Get_Data()
         {
-            TService service = (TService)Activator.CreateInstance(typeof(TService), GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
-            
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
             await _dataUtil(service).GetTestData();
             var Response = service.Read(1, 25, "{}", null, null, "{}");
             Assert.NotEmpty(Response.Data);
@@ -83,7 +89,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         [Fact]
         public async void Should_Success_Get_Data_By_Id()
         {
-            TService service = (TService)Activator.CreateInstance(typeof(TService), GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
 
             var model = await _dataUtil(service).GetTestData();
             var Response = await service.ReadByIdAsync(model.Id);
@@ -93,7 +99,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         [Fact]
         public async void Should_Success_Create_Data()
         {
-            TService service = (TService)Activator.CreateInstance(typeof(TService), GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
 
             var model = _dataUtil(service).GetNewData();
             var Response = await service.CreateAsync(model);
@@ -111,7 +117,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         [Fact]
         public async void Should_Success_Update_Data()
         {
-            TService service = (TService)Activator.CreateInstance(typeof(TService), GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
 
             var model = await _dataUtil(service).GetTestData();
             var newModel = await service.ReadByIdAsync(model.Id);
@@ -125,7 +131,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         [Fact]
         public async void Should_Success_Delete_Data()
         {
-            TService service = (TService)Activator.CreateInstance(typeof(TService), GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
 
             var model = await _dataUtil(service).GetTestData();
             var newModel = await service.ReadByIdAsync(model.Id);

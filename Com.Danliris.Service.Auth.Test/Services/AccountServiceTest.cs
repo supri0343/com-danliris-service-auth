@@ -25,7 +25,7 @@ namespace Com.Danliris.Service.Auth.Test.Services
         [Fact]
         public async void Should_Success_Authenticate_Data()
         {
-            var service = new AccountService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
             var model = await _dataUtil(service).GetTestData();
             var Response = service.Authenticate(model.Username, model.Password);
             Assert.NotNull(Response);
