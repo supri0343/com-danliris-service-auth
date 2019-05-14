@@ -1,0 +1,3 @@
+ignore:
+  - "Com.Danliris.Service.Auth.Lib/Migrations"
+  - "Com.Danliris.Service.Auth.Lib/Configs"
