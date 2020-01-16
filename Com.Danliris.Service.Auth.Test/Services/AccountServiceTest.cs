@@ -22,11 +22,11 @@ namespace Com.Danliris.Service.Auth.Test.Services
         public AccountServiceTest() : base("account")
         {
         }
-        
+
         protected override Account OnUpdating(Account model)
         {
             model.Username += "[updated]";
-            return model; 
+            return model;
         }
 
         public override async void Should_Success_Create_Data()
@@ -54,6 +54,24 @@ namespace Com.Danliris.Service.Auth.Test.Services
             var model = await _dataUtil(service).GetTestData();
             var Response = service.Authenticate(model.Username, model.Password);
             Assert.NotNull(Response);
+        }
+
+        [Fact]
+        public async void Should_Fail_Authenticate_Data_Username_null()
+        {
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var model = await _dataUtil(service).GetTestData();
+            await Assert.ThrowsAnyAsync<Exception>(() => service.Authenticate(null, model.Password));
+
+        }
+
+        [Fact]
+        public async void Should_Fail_Authenticate_Data_Password_null()
+        {
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var model = await _dataUtil(service).GetTestData();
+            await Assert.ThrowsAnyAsync<Exception>(() => service.Authenticate(model.Password, null));
+
         }
 
         [Fact]
@@ -100,7 +118,7 @@ namespace Com.Danliris.Service.Auth.Test.Services
             var data = await _dataUtil(service).GetTestData();
             vm.username = data.Username;
             vm.password = data.Password;
-            
+
             Assert.True(vm.Validate(context).Count() > 0);
 
             vm.roles = new List<RoleViewModel>()
