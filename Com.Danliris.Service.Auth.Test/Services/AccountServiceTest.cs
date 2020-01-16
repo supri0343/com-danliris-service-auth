@@ -29,6 +29,24 @@ namespace Com.Danliris.Service.Auth.Test.Services
             return model; 
         }
 
+        public override async void Should_Success_Create_Data()
+        {
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var roleService = new RoleService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var roleDataUtil = new RoleDataUtil(roleService);
+            var role = await roleDataUtil.GetTestData();
+            var model = _dataUtil(service).GetNewData();
+            model.AccountRoles = new List<AccountRole>()
+            {
+                new AccountRole()
+                {
+                    RoleId = role.Id
+                }
+            };
+            var Response = await service.CreateAsync(model);
+            Assert.NotEqual(0, Response);
+        }
+
         [Fact]
         public async void Should_Success_Authenticate_Data()
         {

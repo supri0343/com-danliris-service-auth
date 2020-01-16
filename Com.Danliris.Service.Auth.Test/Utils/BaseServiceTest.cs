@@ -53,7 +53,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         protected virtual Mock<IServiceProvider> GetServiceProvider()
         {
             var serviceProvider = new Mock<IServiceProvider>();
-            
+
             serviceProvider
                 .Setup(x => x.GetService(typeof(IIdentityService)))
                 .Returns(new IdentityService() { Token = "Token", Username = "Test" });
@@ -97,7 +97,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         }
 
         [Fact]
-        public async void Should_Success_Create_Data()
+        public virtual async void Should_Success_Create_Data()
         {
             var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
 
@@ -142,6 +142,6 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         }
 
         protected abstract TModel OnUpdating(TModel model);
-        
+
     }
 }
