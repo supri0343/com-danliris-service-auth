@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utilities\Authentication.cs" />
+    <Compile Remove="Utilities\BaseClass\BaseViewModel.cs" />
     <Compile Remove="ViewModels\AccountRoleViewModel.cs" />
+    <Compile Remove="ViewModels\TokenSignViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>

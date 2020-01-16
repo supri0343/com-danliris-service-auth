@@ -18,7 +18,7 @@ using Xunit;
 namespace Com.Danliris.Service.Auth.Test.Utils
 {
     public abstract class BaseServiceTest<TModel, TViewModel, TService, TDataUtil>
-        where TModel : StandardEntity, IValidatableObject, new()
+        where TModel : StandardEntity, new()
         where TService : class, IBaseService<TModel>
         where TViewModel : BaseOldViewModel, IValidatableObject, new()
         where TDataUtil : BaseDataUtil<TModel, TViewModel, TService>
@@ -50,7 +50,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
             return dbContext;
         }
 
-        protected Mock<IServiceProvider> GetServiceProvider()
+        protected virtual Mock<IServiceProvider> GetServiceProvider()
         {
             var serviceProvider = new Mock<IServiceProvider>();
             
@@ -107,7 +107,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         }
 
         [Fact]
-        public void Should_Success_Validate_All_Null_Data()
+        public virtual void Should_Success_Validate_All_Null_Data()
         {
             TViewModel vm = new TViewModel();
 

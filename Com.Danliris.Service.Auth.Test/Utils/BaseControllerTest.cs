@@ -22,7 +22,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
 {
     public abstract class BaseControllerTest<TController, TModel, TViewModel, IService>
         where TController : BaseController<TModel, TViewModel, IService>
-        where TModel : StandardEntity, IValidatableObject, new()
+        where TModel : StandardEntity, new()
         where TViewModel : BaseOldViewModel, IValidatableObject, new()
         where IService : class, IBaseService<TModel>
     {

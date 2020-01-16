@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Com.Danliris.Service.Auth.Lib.Models
 {
-    public class Account : StandardEntity, IValidatableObject
+    public class Account : StandardEntity
     {
         public string Username { get; set; }
         public string Password { get; set; }
@@ -17,16 +17,5 @@ namespace Com.Danliris.Service.Auth.Lib.Models
 
         public string UId { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-
-            /* Service Validation */
-            BusinessLogic.Services.AccountService service = (BusinessLogic.Services.AccountService)validationContext.GetService(typeof(BusinessLogic.Services.AccountService));
-
-            if (service.DbContext.Set<Account>().Count(r => r.IsDeleted.Equals(false) && r.Id != this.Id && r.Username.Equals(this.Username)) > 0) /* Unique */
-            {
-                yield return new ValidationResult("Username already exists", new List<string> { "username" });
-            }
-        }
     }
 }

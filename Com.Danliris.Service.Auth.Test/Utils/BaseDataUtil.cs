@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Com.Danliris.Service.Auth.Test.Utils
 {
     public abstract class BaseDataUtil<TModel, TViewModel, TService>
-        where TModel : StandardEntity, IValidatableObject, new()
+        where TModel : StandardEntity, new()
         where TViewModel : BaseOldViewModel, IValidatableObject, new()
         where TService : class, IBaseService<TModel>
     {

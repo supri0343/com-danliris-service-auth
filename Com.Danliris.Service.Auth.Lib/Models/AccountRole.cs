@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Com.Danliris.Service.Auth.Lib.Models
 {
-    public class AccountRole : StandardEntity, IValidatableObject
+    public class AccountRole : StandardEntity
     {
         public int AccountId { get; set; }
         public virtual Account Account { get; set; }
@@ -17,9 +17,5 @@ namespace Com.Danliris.Service.Auth.Lib.Models
 
         public string UId { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            return new List<ValidationResult>();
-        }
     }
 }

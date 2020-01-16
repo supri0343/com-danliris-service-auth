@@ -1,7 +1,10 @@
-﻿using Com.Danliris.Service.Auth.Lib.Utilities.BaseClass;
+﻿using Com.Danliris.Service.Auth.Lib.Models;
+using Com.Danliris.Service.Auth.Lib.Utilities.BaseClass;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using Com.Danliris.Service.Auth.Lib.BusinessLogic.Interfaces;
 
 namespace Com.Danliris.Service.Auth.Lib.ViewModels
 {
@@ -25,6 +28,14 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
 
             if (this.profile == null || string.IsNullOrWhiteSpace(this.profile.firstname))
                 yield return new ValidationResult("{ firstname: 'First Name is required' }", new List<string> { "profile" });
+
+            /* Service Validation */
+            var service = validationContext.GetService<IAccountService>();
+
+            if (service.CheckDuplicate(_id, username)) /* Unique */
+            {
+                yield return new ValidationResult("Username already exists", new List<string> { "username" });
+            }
 
             string accountRoleError = "[";
             if (roles != null)

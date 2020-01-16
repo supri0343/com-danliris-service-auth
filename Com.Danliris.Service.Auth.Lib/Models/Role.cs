@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Com.Danliris.Service.Auth.Lib.Models
 {
-    public class Role : StandardEntity, IValidatableObject
+    public class Role : StandardEntity
     {
         public string Code { get; set; }
         public string Name { get; set; }
@@ -18,15 +18,5 @@ namespace Com.Danliris.Service.Auth.Lib.Models
 
         public string UId { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            /* Service Validation */
-            RoleService service = (RoleService)validationContext.GetService(typeof(RoleService));
-
-            if (service.DbContext.Set<Role>().Count(r => r.IsDeleted.Equals(false) && r.Id != this.Id && r.Code.Equals(this.Code)) > 0) /* Unique */
-            {
-                yield return new ValidationResult("Code already exists", new List<string> { "code" });
-            }
-        }
     }
 }

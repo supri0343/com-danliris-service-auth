@@ -184,5 +184,10 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                 return user;
             }
         }
+
+        public bool CheckDuplicate(int id, string username)
+        {
+            return DbSet.Any(r => r.IsDeleted.Equals(false) && r.Id != id && r.Username.Equals(username));
+        }
     }
 }
