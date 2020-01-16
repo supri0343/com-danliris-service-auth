@@ -24,7 +24,6 @@ namespace Com.Danliris.Service.Auth.WebApi.Controllers.v1
         public static readonly string ApiVersion = "1.0.0";
         public readonly IAccountService _accountService;
         public readonly IMapper Mapper;
-        public IConfiguration Configuration { get; }
         public static string Secret;
 
         public AuthenticateController(IAccountService accountService, IMapper mapper, ISecret secret)

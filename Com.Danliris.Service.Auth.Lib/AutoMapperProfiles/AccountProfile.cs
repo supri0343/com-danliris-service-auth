@@ -8,7 +8,7 @@ namespace Com.Danliris.Service.Auth.Lib.AutoMapperProfiles
 {
     public class AccountProfile : BaseProfile
     {
-        public AccountProfile()
+        public AccountProfile() : base()
         {
             CreateMap<Models.AccountProfile, AccountProfileViewModel>()
                 .ForPath(d => d.firstname, opt => opt.MapFrom(s => s.Firstname))

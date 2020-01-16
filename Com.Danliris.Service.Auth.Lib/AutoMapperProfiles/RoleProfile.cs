@@ -5,7 +5,7 @@ namespace Com.Danliris.Service.Auth.Lib.AutoMapperProfiles
 {
     public class RoleProfile : BaseProfile
     {
-        public RoleProfile()
+        public RoleProfile() : base()
         {
             CreateMap<Permission, PermissionViewModel>()
                 .ForPath(d => d.id, opt => opt.MapFrom(s => s.Id))

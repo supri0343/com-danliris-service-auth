@@ -11,5 +11,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Interfaces
     public interface IAccountService : IBaseService<Account>
     {
         Task<Account> Authenticate(string username, string password);
+
+        bool CheckDuplicate(int id, string username);
     }
 }

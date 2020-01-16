@@ -132,5 +132,10 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
             DbSet.Update(data);
             return await DbContext.SaveChangesAsync();
         }
+
+        public bool CheckDuplicate(int id, string code)
+        {
+            return DbSet.Any(r => r.IsDeleted.Equals(false) && r.Id != id && r.Code.Equals(code));
+        }
     }
 }

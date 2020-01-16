@@ -9,7 +9,7 @@ using System.Text;
 namespace Com.Danliris.Service.Auth.Lib.Utilities
 {
     public static class QueryHelper<TModel>
-        where TModel : StandardEntity, IValidatableObject
+        where TModel : StandardEntity
     {
         public static IQueryable<TModel> Filter(IQueryable<TModel> query, Dictionary<string, object> filterDictionary)
         {

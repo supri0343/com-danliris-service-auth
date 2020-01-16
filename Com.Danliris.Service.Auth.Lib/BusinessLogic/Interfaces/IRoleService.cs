@@ -8,5 +8,6 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Interfaces
 {
     public interface IRoleService : IBaseService<Role>
     {
+        bool CheckDuplicate(int id, string code);
     }
 }

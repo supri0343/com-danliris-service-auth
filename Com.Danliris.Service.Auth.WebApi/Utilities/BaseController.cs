@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Com.Danliris.Service.Auth.WebApi.Utilities
 {
     public abstract class BaseController<TModel, TViewModel, IService> : Controller
-       where TModel : StandardEntity, IValidatableObject
+       where TModel : StandardEntity
        where TViewModel : BaseOldViewModel, IValidatableObject
        where IService : IBaseService<TModel>
     {

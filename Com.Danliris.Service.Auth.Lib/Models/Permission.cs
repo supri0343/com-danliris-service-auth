@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Com.Danliris.Service.Auth.Lib.Models
 {
-    public class Permission : StandardEntity, IValidatableObject
+    public class Permission : StandardEntity
     {
         public int UnitId { get; set; }
         public string UnitCode { get; set; }
@@ -19,9 +19,5 @@ namespace Com.Danliris.Service.Auth.Lib.Models
 
         public string UId { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            return new List<ValidationResult>();
-        }
     }
 }
