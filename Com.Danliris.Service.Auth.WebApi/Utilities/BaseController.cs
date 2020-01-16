@@ -96,7 +96,7 @@ namespace Com.Danliris.Service.Auth.WebApi.Utilities
             }
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             try
@@ -128,7 +128,7 @@ namespace Com.Danliris.Service.Auth.WebApi.Utilities
             }
         }
 
-        [HttpPut("{Id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] TViewModel viewModel)
         {
             try
@@ -166,7 +166,7 @@ namespace Com.Danliris.Service.Auth.WebApi.Utilities
             }
         }
 
-        [HttpDelete("{Id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try
