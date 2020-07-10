@@ -67,7 +67,9 @@ namespace Com.Danliris.Service.Auth.Test.Controllers
             var accountModel = accountDataUtil.GetNewData();
             accountModel.AccountRoles.Add(new AccountRole()
             {
-                Role = roleModel
+                Role = roleModel,
+                RoleUId = "RoleUId",
+                UId = "UId"
             });
             mocks.Secret.Setup(s => s.SecretString).Returns("secretsecretsecret");
             mocks.Service.Setup(s => s.Authenticate(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(accountModel);

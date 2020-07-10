@@ -5,6 +5,7 @@ using Com.Danliris.Service.Auth.Lib.Utilities.BaseInterface;
 using Com.Moonlay.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -38,12 +39,28 @@ namespace Com.Danliris.Service.Auth.Test.Utils
             return string.Concat(sf.GetMethod().Name, "_", ENTITY);
         }
 
+        protected string GetCurrentAsyncMethod([CallerMemberName] string methodName = "")
+        {
+            var method = new StackTrace()
+                .GetFrames()
+                .Select(frame => frame.GetMethod())
+                .FirstOrDefault(item => item.Name == methodName);
+
+            return method.Name;
+
+        }
+
         protected AuthDbContext _dbContext(string testName)
         {
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+
             DbContextOptionsBuilder<AuthDbContext> optionsBuilder = new DbContextOptionsBuilder<AuthDbContext>();
             optionsBuilder
                 .UseInMemoryDatabase(testName)
-                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
+                 .UseInternalServiceProvider(serviceProvider);
 
             AuthDbContext dbContext = new AuthDbContext(optionsBuilder.Options);
 
@@ -56,7 +73,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
 
             serviceProvider
                 .Setup(x => x.GetService(typeof(IIdentityService)))
-                .Returns(new IdentityService() { Token = "Token", Username = "Test" });
+                .Returns(new IdentityService() { Token = "Token", Username = "Test", TimezoneOffset=1 });
 
 
             return serviceProvider;
@@ -99,7 +116,7 @@ namespace Com.Danliris.Service.Auth.Test.Utils
         [Fact]
         public virtual async void Should_Success_Create_Data()
         {
-            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentAsyncMethod()));
 
             var model = _dataUtil(service).GetNewData();
             var Response = await service.CreateAsync(model);

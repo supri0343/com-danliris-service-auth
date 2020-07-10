@@ -4,7 +4,6 @@ using Com.Danliris.Service.Auth.Lib.Services.IdentityService;
 using Com.Danliris.Service.Auth.Lib.Utilities;
 using Com.Moonlay.Models;
 using Com.Moonlay.NetCore.Lib;
-using IdentityServer4.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

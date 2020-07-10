@@ -44,6 +44,20 @@ namespace Com.Danliris.Service.Auth.Test.Services
 
         }
 
+        [Fact]
+        public async void UpdateAsync_When_addedRoles_Return_Success()
+        {
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
+
+            var model = await _dataUtil(service).GetTestData();
+
+
+            var modelInput = _dataUtil(service).GetDataInput();
+            
+            var Response = await service.UpdateAsync(model.Id, modelInput);
+            Assert.NotEqual(0, Response);
+        }
+
         public override async void Should_Success_Validate_All_Null_Data()
         {
             var serviceProvider = GetServiceProvider();

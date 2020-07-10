@@ -25,6 +25,7 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                 Username = "username",
                 Password = "password",
                 IsLocked = false,
+
                 AccountProfile = new AccountProfile()
                 {
                     Dob = DateTimeOffset.UtcNow,
@@ -34,8 +35,61 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                     Lastname = "lastname"
                 },
                 AccountRoles = new List<AccountRole>()
+                {
+                    new AccountRole()
+                    {
+                        Role =new Role()
+                        {
+                            Description="Description"
+                        },
+
+                    }
+                }
             };
         }
+
+        public Account GetNullDataInput()
+        {
+            return new Account()
+            {
+                AccountRoles =new List<AccountRole>()
+            };
+        }
+        public Account GetDataInput()
+        {
+            return new Account()
+            {
+                Username = "username",
+                Password = "password",
+                IsLocked = false,
+                UId = "UId",
+                AccountProfile = new AccountProfile()
+                {
+                    Dob = DateTimeOffset.UtcNow,
+                    Email = "email",
+                    Gender = "male",
+                    Firstname = "firstname",
+                    Lastname = "lastname",
+                    UId= "UId",
+                },
+                AccountRoles = new List<AccountRole>()
+                {
+                    new AccountRole()
+                    {
+                        RoleId =2,
+                        Role =new Role()
+                        {   Name="Name",
+                            UId="UId",
+                            Id =2,
+                            Description="Description"
+                        },
+
+                    }
+                }
+            };
+        }
+
+
 
         public override AccountViewModel GetNewViewModel()
         {
