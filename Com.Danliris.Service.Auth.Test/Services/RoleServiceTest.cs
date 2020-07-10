@@ -50,10 +50,8 @@ namespace Com.Danliris.Service.Auth.Test.Services
             var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
 
             var model = await _dataUtil(service).GetTestData();
-
-            var modelInput = _dataUtil(service).GetDataInput();
             
-            var Response = await service.UpdateAsync(model.Id, modelInput);
+            var Response = await service.UpdateAsync(model.Id, _dataUtil(service).GetDataInput());
             Assert.NotEqual(0, Response);
         }
 

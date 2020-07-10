@@ -32,7 +32,6 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                         Unit = "unit",
                         UnitCode = "unitcode",
                         UnitId = 1,
-                       
                     }
                 }
             };
