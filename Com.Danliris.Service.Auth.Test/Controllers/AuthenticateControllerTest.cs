@@ -57,15 +57,13 @@ namespace Com.Danliris.Service.Auth.Test.Controllers
         }
 
         [Fact]
-        public async Task Post_WithoutException_ReturnToken()
-        {
+        public async Task Post_WithoutException_ReturnToken(){
             var mocks = GetMocks();
             RoleDataUtil roleDataUtil = new RoleDataUtil();
             AccountDataUtil accountDataUtil = new AccountDataUtil();
             var roleModel = roleDataUtil.GetNewData();
             var accountModel = accountDataUtil.GetNewData();
-            accountModel.AccountRoles.Add(new AccountRole()
-            {
+            accountModel.AccountRoles.Add(new AccountRole(){
                 Role = roleModel,
                 RoleUId = "RoleUId",
                 UId = "UId"
@@ -77,8 +75,7 @@ namespace Com.Danliris.Service.Auth.Test.Controllers
             accountVM.roles.Add(roleVM);
             mocks.Mapper.Setup(s => s.Map<AccountViewModel>(It.IsAny<Account>())).Returns(accountVM);
             AuthenticateController controller = GetController(mocks);
-            var result = await controller.Post(new LoginViewModel()
-            {
+            var result = await controller.Post(new LoginViewModel(){
                 Password = "password",
                 Username = "username"
             });
