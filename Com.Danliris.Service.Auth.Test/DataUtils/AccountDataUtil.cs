@@ -43,30 +43,7 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
             };
         }
 
-        public Account GetDataInput(){
-            return new Account(){
-                Username = "username",
-                Password = "password",
-                IsLocked = false,
-                UId = "UId", AccountProfile = new AccountProfile(){
-                    Dob = DateTimeOffset.UtcNow,
-                    Email = "email",
-                    Gender = "male",
-                    Firstname = "firstname",
-                    Lastname = "lastname",
-                    UId = "UId",
-                },AccountRoles = new List<AccountRole>(){ new AccountRole(){
-                        RoleId =2,
-                        Role = new Role(){
-                            Name="Name",
-                            UId="UId",
-                            Id =2,
-                            Description="Description"
-                        }
-                    }
-                }
-            };
-        }
+        
 
         public override AccountViewModel GetNewViewModel()
         {
