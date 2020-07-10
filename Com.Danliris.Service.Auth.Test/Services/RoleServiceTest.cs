@@ -51,7 +51,6 @@ namespace Com.Danliris.Service.Auth.Test.Services
 
             var model = await _dataUtil(service).GetTestData();
 
-
             var modelInput = _dataUtil(service).GetDataInput();
             
             var Response = await service.UpdateAsync(model.Id, modelInput);

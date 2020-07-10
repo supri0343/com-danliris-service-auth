@@ -59,7 +59,6 @@ namespace Com.Danliris.Service.Auth.Test.Controllers
         [Fact]
         public async Task Post_WithoutException_ReturnToken()
         {
-
             var mocks = GetMocks();
             RoleDataUtil roleDataUtil = new RoleDataUtil();
             AccountDataUtil accountDataUtil = new AccountDataUtil();

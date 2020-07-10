@@ -95,12 +95,8 @@ namespace Com.Danliris.Service.Auth.Test.Services
         public async void UpdateAsync_When_addedRoles_Return_Success()
         {
             var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
-
             var model = await _dataUtil(service).GetTestData();
-            
-
             var modelInput = _dataUtil(service).GetDataInput();
-
             var Response = await service.UpdateAsync(model.Id, modelInput);
             Assert.NotEqual(0, Response);
         }

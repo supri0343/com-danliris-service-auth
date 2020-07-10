@@ -25,7 +25,6 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                 Username = "username",
                 Password = "password",
                 IsLocked = false,
-
                 AccountProfile = new AccountProfile()
                 {
                     Dob = DateTimeOffset.UtcNow,
@@ -42,19 +41,12 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                         {
                             Description="Description"
                         },
-
                     }
                 }
             };
         }
 
-        public Account GetNullDataInput()
-        {
-            return new Account()
-            {
-                AccountRoles =new List<AccountRole>()
-            };
-        }
+       
         public Account GetDataInput()
         {
             return new Account()
@@ -77,13 +69,12 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                     new AccountRole()
                     {
                         RoleId =2,
-                        Role =new Role()
-                        {   Name="Name",
+                        Role =new Role(){   
+                            Name="Name",
                             UId="UId",
                             Id =2,
                             Description="Description"
-                        },
-
+                        }
                     }
                 }
             };
