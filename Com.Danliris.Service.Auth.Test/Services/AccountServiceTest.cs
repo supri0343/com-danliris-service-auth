@@ -92,38 +92,26 @@ namespace Com.Danliris.Service.Auth.Test.Services
         }
 
         [Fact]
-        public async void UpdateAsync_When_addedRoles_Return_Success()
-        {
-            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod()));
-            var model = await _dataUtil(service).GetTestData();
-            var dataInput = new Account()
-            {
-                Username = "username",
-                Password = "password",
-                IsLocked = false,
-                UId = "UId",
-                AccountProfile = new AccountProfile()
-                {
+        public async void UpdateAsync_When_addedRoles_Return_Success(){
+            var service = GetService(GetServiceProvider().Object, _dbContext(GetCurrentMethod())); var model = await _dataUtil(service).GetTestData();
+            var dataInput = new Account(){
+                Username = "username",Password = "password",IsLocked = false,
+                UId = "UId", AccountProfile = new AccountProfile(){
                     Dob = DateTimeOffset.UtcNow,
                     Email = "email",
                     Gender = "male",
                     Firstname = "firstname",
                     Lastname = "lastname",
                     UId = "UId",
-                },
-                AccountRoles = new List<AccountRole>(){ new AccountRole(){
+                }, AccountRoles = new List<AccountRole>(){ new AccountRole(){
                         RoleId =2,
                         Role = new Role(){
-                            Name="Name",
-                            UId="UId",
-                            Id =2,
-                            Description="Description"
+                            Name="Name",UId="UId",Id =2, Description="Description"
                         }
                     }
                 }
             };
-            var Response = await service.UpdateAsync(model.Id, dataInput);
-            Assert.NotEqual(0, Response);
+            var Response = await service.UpdateAsync(model.Id, dataInput); Assert.NotEqual(0, Response);
         }
 
         public override async void Should_Success_Validate_All_Null_Data()
