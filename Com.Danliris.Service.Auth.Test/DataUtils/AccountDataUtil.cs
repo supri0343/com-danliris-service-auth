@@ -33,9 +33,17 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                     Firstname = "firstname",
                     Lastname = "lastname"
                 },
-                AccountRoles = new List<AccountRole>()
+                AccountRoles = new List<AccountRole>(){
+                    new AccountRole(){
+                        Role =new Role(){
+                            Description="Description"
+                        },
+                    }
+                }
             };
         }
+
+        
 
         public override AccountViewModel GetNewViewModel()
         {

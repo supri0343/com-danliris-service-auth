@@ -31,7 +31,30 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                         permission = 1,
                         Unit = "unit",
                         UnitCode = "unitcode",
-                        UnitId = 1
+                        UnitId = 1,
+                    }
+                }
+            };
+        }
+
+        public Role GetDataInput()
+        {
+            return new Role()
+            {
+                Code = "code",
+                Description = "desc",
+                Name = "name",
+                Permissions = new List<Permission>()
+                {
+                    new Permission()
+                    {
+                        Id =2,
+                        Division = "div",
+                        permission = 1,
+                        Unit = "unit",
+                        UnitCode = "unitcode",
+                        UnitId = 1,
+                        UId="UId"
                     }
                 }
             };
