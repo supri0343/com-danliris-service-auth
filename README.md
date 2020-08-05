@@ -65,8 +65,8 @@ and  Your appsettings.Developtment.json look like this :
 ```
 - Make sure port application has no conflict, setting port application in launchSettings.json
 ```
-com-danliris-service-finance-accounting
- ┣ Com.Danliris.Service.Finance.Accounting.WebApi
+com-danliris-service-auth
+ ┣ Com.Danliris.Service.Auth.WebApi
     ┗ Properties
        ┗ launchSettings.json
 ```
@@ -112,8 +112,8 @@ file launchSettings.json look like this :
 - Setting connection to database using ConnectionStrings in appsettings.json and appsettings.Developtment.json.
 - Make sure port application has no conflict, setting port application in launchSettings.json.
 ```
-com-danliris-service-finance-accounting
- ┣ Com.Danliris.Service.Finance.Accounting.WebApi
+com-danliris-service-auth
+ ┣ Com.Danliris.Service.Auth.WebApi
     ┗ Properties
        ┗ launchSettings.json
 ```
