@@ -1,0 +1,4 @@
+ignore:
+  - "Com.Danliris.Service.Auth.Lib/Migrations"
+  - "Com.Danliris.Service.Auth.Lib/Configs"
+  - "Com.Danliris.Service.Auth.WebApi/Startup.cs"
