@@ -23,15 +23,20 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                 Code = "code",
                 Description = "desc",
                 Name = "name",
-                Permissions = new List<Permission>()
+                Permissions = new List<Permission2>()
                 {
-                    new Permission()
+                    new Permission2()
                     {
-                        Division = "div",
+                        //Division = "div",
+                        //permission = 1,
+                        //Unit = "unit",
+                        //UnitCode = "unitcode",
+                        //UnitId = 1,
+                        Code = "div",
                         permission = 1,
-                        Unit = "unit",
-                        UnitCode = "unitcode",
-                        UnitId = 1,
+                        Menu = "unit",
+                        SubMenu = "unitcode",
+                        MenuName = "name",
                     }
                 }
             };
@@ -44,16 +49,16 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                 Code = "code",
                 Description = "desc",
                 Name = "name",
-                Permissions = new List<Permission>()
+                Permissions = new List<Permission2>()
                 {
-                    new Permission()
+                    new Permission2()
                     {
                         Id =2,
-                        Division = "div",
+                        Code = "div",
                         permission = 1,
-                        Unit = "unit",
-                        UnitCode = "unitcode",
-                        UnitId = 1,
+                        Menu = "unit",
+                        SubMenu = "unitcode",
+                        MenuName = "name",
                         UId="UId"
                     }
                 }
@@ -67,21 +72,21 @@ namespace Com.Danliris.Service.Auth.Test.DataUtils
                 code = "code",
                 description = "desc",
                 name = "name",
-                permissions = new List<PermissionViewModel>()
+                permissions = new List<Permission2ViewModel>()
                 {
-                    new PermissionViewModel()
+                    new Permission2ViewModel()
                     {
                         permission = 1,
-                        unit = new UnitViewModel()
-                        {
-                            Id = 1,
-                            Name = "name",
-                            Code = "code",
-                            Division = new DivisionViewModel()
-                            {
-                                Name = "divName"
-                            }
-                        }
+                        //menu = new MenuViewModel()
+                        //{
+                        Code = "div",
+                        Menu = "unit",
+                        SubMenu = "unitcode",
+                        MenuName = "name",
+                        
+                        
+                          
+                        //}
                     }
                 }
             };

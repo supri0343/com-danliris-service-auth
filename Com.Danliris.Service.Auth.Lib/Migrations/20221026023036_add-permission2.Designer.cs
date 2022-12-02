@@ -4,14 +4,16 @@ using Com.Danliris.Service.Auth.Lib;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Com.Danliris.Service.Auth.Lib.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221026023036_add-permission2")]
+    partial class addpermission2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -271,9 +273,9 @@ namespace Com.Danliris.Service.Auth.Lib.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Active");
+                    b.Property<int>("AccountId");
 
-                    b.Property<string>("Code");
+                    b.Property<bool>("Active");
 
                     b.Property<string>("CreatedAgent")
                         .IsRequired()
@@ -307,11 +309,11 @@ namespace Com.Danliris.Service.Auth.Lib.Migrations
 
                     b.Property<DateTime>("LastModifiedUtc");
 
-                    b.Property<string>("Menu");
+                    b.Property<string>("MenuCode");
+
+                    b.Property<int>("MenuId");
 
                     b.Property<string>("MenuName");
-
-                    b.Property<int>("RoleId");
 
                     b.Property<string>("SubMenu");
 
@@ -321,7 +323,7 @@ namespace Com.Danliris.Service.Auth.Lib.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Permission2");
                 });
@@ -394,7 +396,7 @@ namespace Com.Danliris.Service.Auth.Lib.Migrations
             modelBuilder.Entity("Com.Danliris.Service.Auth.Lib.Models.AccountRole", b =>
                 {
                     b.HasOne("Com.Danliris.Service.Auth.Lib.Models.Account", "Account")
-                        .WithMany("AccountRoles")
+                        .WithMany()
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -407,16 +409,16 @@ namespace Com.Danliris.Service.Auth.Lib.Migrations
             modelBuilder.Entity("Com.Danliris.Service.Auth.Lib.Models.Permission", b =>
                 {
                     b.HasOne("Com.Danliris.Service.Auth.Lib.Models.Role", "Role")
-                        .WithMany()
+                        .WithMany("Permissions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Com.Danliris.Service.Auth.Lib.Models.Permission2", b =>
                 {
-                    b.HasOne("Com.Danliris.Service.Auth.Lib.Models.Role", "Role")
+                    b.HasOne("Com.Danliris.Service.Auth.Lib.Models.Account", "Account")
                         .WithMany("Permissions")
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

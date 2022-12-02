@@ -13,7 +13,7 @@ namespace Com.Danliris.Service.Auth.Lib.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Permission> Permissions { get; set; }
+        public virtual ICollection<Permission2> Permissions { get; set; }
         public virtual ICollection<AccountRole> AccountRoles { get; set; }
 
         public string UId { get; set; }

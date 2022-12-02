@@ -27,14 +27,25 @@ namespace Com.Danliris.Service.Auth.Lib.AutoMapperProfiles
                 .ForPath(d => d.permissions, opt => opt.MapFrom(s => s.Role.Permissions))
                 .ReverseMap();
 
-            CreateMap<Permission, PermissionViewModel>()
-                .ForPath(d => d.id, opt => opt.MapFrom(s => s.Id))
-                .ForPath(d => d.permission, opt => opt.MapFrom(s => s.permission))
+            //CreateMap<Permission, PermissionViewModel>()
+            //    .ForPath(d => d.id, opt => opt.MapFrom(s => s.Id))
+            //    .ForPath(d => d.permission, opt => opt.MapFrom(s => s.permission))
+            //    .ForPath(d => d.roleId, opt => opt.MapFrom(s => s.RoleId))
+            //    .ForPath(d => d.unit.Code, opt => opt.MapFrom(s => s.UnitCode))
+            //    .ForPath(d => d.unit.Name, opt => opt.MapFrom(s => s.Unit))
+            //    .ForPath(d => d.unit.Id, opt => opt.MapFrom(s => s.UnitId))
+            //    .ForPath(d => d.unit.Division.Name, opt => opt.MapFrom(s => s.Division))
+            //    .ReverseMap();
+
+            CreateMap<Permission2, Permission2ViewModel>()
+                //.ForPath(d => d.id, opt => opt.MapFrom(s => s.Id))
+                //.ForPath(d => d.permission, opt => opt.MapFrom(s => s.permission))
                 .ForPath(d => d.roleId, opt => opt.MapFrom(s => s.RoleId))
-                .ForPath(d => d.unit.Code, opt => opt.MapFrom(s => s.UnitCode))
-                .ForPath(d => d.unit.Name, opt => opt.MapFrom(s => s.Unit))
-                .ForPath(d => d.unit.Id, opt => opt.MapFrom(s => s.UnitId))
-                .ForPath(d => d.unit.Division.Name, opt => opt.MapFrom(s => s.Division))
+                .ForPath(d => d.Menu, opt => opt.MapFrom(s => s.Menu))
+                .ForPath(d => d.Code, opt => opt.MapFrom(s => s.Code))
+                .ForPath(d => d.SubMenu, opt => opt.MapFrom(s => s.SubMenu))
+                //.ForPath(d => d.menu.Id, opt => opt.MapFrom(s => s.Id))
+                .ForPath(d => d.MenuName, opt => opt.MapFrom(s => s.MenuName))
                 .ReverseMap();
 
             CreateMap<Account, AccountViewModel>()
@@ -43,6 +54,7 @@ namespace Com.Danliris.Service.Auth.Lib.AutoMapperProfiles
                 .ForPath(d => d.isLocked, opt => opt.MapFrom(s => s.IsLocked))
                 .ForPath(d => d.profile, opt => opt.MapFrom(s => s.AccountProfile))
                 .ForPath(d => d.roles, opt => opt.MapFrom(s => s.AccountRoles))
+                //.ForPath(d => d.permissions, opt => opt.MapFrom(s => s.Permissions))
                 .ReverseMap();
 
             

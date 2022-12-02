@@ -22,13 +22,13 @@ namespace Com.Danliris.Service.Auth.Test.Controllers
             AccountDataUtil accountDataUtil = new AccountDataUtil();
             var roleVM = roleDataUtil.GetNewViewModel();
             var accountVM = accountDataUtil.GetNewViewModel();
-            accountVM.roles.Add(roleVM);
+            //accountVM.roles.Add(roleVM);
             var user = new Mock<ClaimsPrincipal>();
             var claims = new Claim[]
             {
                 new Claim("username", "unittestusername"),
                 new Claim("profile", JsonConvert.SerializeObject(accountVM.profile)),
-                new Claim("permission", JsonConvert.SerializeObject(accountVM.roles)),
+                //new Claim("permission", JsonConvert.SerializeObject(accountVM.roles)),
                 new Claim("iat", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
             };
             user.Setup(u => u.Claims).Returns(claims);

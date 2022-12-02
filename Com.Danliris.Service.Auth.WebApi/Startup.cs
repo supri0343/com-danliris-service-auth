@@ -145,11 +145,11 @@ namespace Com.Danliris.Service.Auth.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<AuthDbContext>();
-                context.Database.Migrate();
-            }
+            //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetService<AuthDbContext>();
+            //    context.Database.Migrate();
+            //}
 
             app.UseAuthentication();
             app.UseCors(AUTH_POLICY);
