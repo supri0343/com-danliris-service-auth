@@ -71,9 +71,9 @@ namespace Com.Danliris.Service.Auth.WebApi.Controllers.v1
 
                     string jsonRes = "{";
 
-                    foreach(var item in viewModel.roles.SelectMany(x => x.permissions).GroupBy(x => x.unit.Code).Select(g => g.First()))
+                    foreach(var item in viewModel.roles.SelectMany(x => x.permissions).GroupBy(x => x.Code).Select(g => g.First()))
                     {
-                        jsonRes = jsonRes + "'" + item.unit.Code + "'" + " : " + item.permission + ",";
+                        jsonRes = jsonRes + "'" + item.Code + "'" + " : " + item.permission + ",";
                     }
                     jsonRes = jsonRes.Remove(jsonRes.Length - 1) + "}";
 

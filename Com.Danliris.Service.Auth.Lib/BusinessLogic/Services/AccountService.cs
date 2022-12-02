@@ -31,6 +31,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
         {
             EntityExtension.FlagForCreate(model, IdentityService.Username, UserAgent);
             EntityExtension.FlagForCreate(model.AccountProfile, IdentityService.Username, UserAgent);
+            //foreach (var item in model.AccountRoles)
             foreach (var item in model.AccountRoles)
             {
                 item.Role = null;
@@ -47,6 +48,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
             Account model = await ReadByIdAsync(id);
             EntityExtension.FlagForDelete(model, IdentityService.Username, UserAgent, true);
             EntityExtension.FlagForDelete(model.AccountProfile, IdentityService.Username, UserAgent, true);
+            //foreach (var item in model.AccountRoles)
             foreach (var item in model.AccountRoles)
             {
                 EntityExtension.FlagForDelete(item, IdentityService.Username, UserAgent, true);
@@ -82,7 +84,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
             {
 
                 AccountProfile = x.AccountProfile,
-                AccountRoles = x.AccountRoles,
+                //AccountRoles = x.AccountRoles,
                 Active = x.Active,
                 CreatedAgent = x.CreatedAgent,
                 CreatedBy = x.CreatedBy,
@@ -113,8 +115,22 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                 .Include(x => x.AccountRoles)
                     .ThenInclude(i => i.Role)
                     .ThenInclude(y => y.Permissions)
+                //.Include(x => x.Permissions)
                 .FirstOrDefaultAsync(d => d.Id.Equals(id) && !d.IsDeleted);
             return result;
+        }
+
+        public async Task<int> UpdatePass(string username, string password)
+        {
+            var data = await DbSet.FirstOrDefaultAsync(x => x.Username.Equals(username));
+            if (!string.IsNullOrEmpty(password))
+            {
+                data.Password = SHA1Encrypt.Hash(password);
+            }
+
+            EntityExtension.FlagForUpdate(data, IdentityService.Username, UserAgent);
+            DbSet.Update(data);
+            return await DbContext.SaveChangesAsync();
         }
 
         public async Task<int> UpdateAsync(int id, Account model)
@@ -178,6 +194,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                             .Include(x => x.AccountRoles)
                                 .ThenInclude(i => i.Role)
                                 .ThenInclude(y => y.Permissions)
+                            //.Include(x => x.Permissions)
                             .SingleOrDefaultAsync(d => d.Username.Equals(username) && d.Password.Equals(SHA1Encrypt.Hash(password), StringComparison.OrdinalIgnoreCase) && !d.IsDeleted);
 
                 return user;

@@ -70,27 +70,27 @@ namespace Com.Danliris.Service.Auth.Test.Services
             vm.code = data.Code;
             Assert.True(vm.Validate(context).Count() > 0);
 
-            vm.permissions = new List<PermissionViewModel>()
+            vm.permissions = new List<Permission2ViewModel>()
             {
-                new PermissionViewModel()
+                new Permission2ViewModel()
                 {
-                    unit = new UnitViewModel()
+                    //menu = new MenuViewModel()
                 }
             };
             Assert.True(vm.Validate(context).Count() > 0);
-            vm.permissions = new List<PermissionViewModel>()
+            vm.permissions = new List<Permission2ViewModel>()
             {
-                new PermissionViewModel()
+                new Permission2ViewModel()
                 {
                     roleId = 1,
                     _createAgent = "a",
                     _createdBy = "a",
                     _createdDate = DateTime.UtcNow,
-                    id = 1,
-                    unit = new UnitViewModel()
-                    {
-                        Name = "err"
-                    }
+                    //id = 1,
+                    //menu = new MenuViewModel()
+                    //{
+                    //    MenuName = "err"
+                    //}
                 }
             };
             Assert.True(vm.Validate(context).Count() > 0);

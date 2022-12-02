@@ -36,13 +36,13 @@ namespace Com.Danliris.Service.Auth.Test.Services
             var roleDataUtil = new RoleDataUtil(roleService);
             var role = await roleDataUtil.GetTestData();
             var model = _dataUtil(service).GetNewData();
-            model.AccountRoles = new List<AccountRole>()
-            {
-                new AccountRole()
-                {
-                    RoleId = role.Id
-                }
-            };
+            //model.AccountRoles = new List<AccountRole>()
+            //{
+            //    new AccountRole()
+            //    {
+            //        RoleId = role.Id
+            //    }
+            //};
             var Response = await service.CreateAsync(model);
             Assert.NotEqual(0, Response);
         }
@@ -103,12 +103,12 @@ namespace Com.Danliris.Service.Auth.Test.Services
                     Firstname = "firstname",
                     Lastname = "lastname",
                     UId = "UId",
-                }, AccountRoles = new List<AccountRole>(){ new AccountRole(){
-                        RoleId =2,
-                        Role = new Role(){
-                            Name="Name",UId="UId",Id =2, Description="Description"
-                        }
-                    }
+                //}, AccountRoles = new List<AccountRole>(){ new AccountRole(){
+                //        RoleId =2,
+                //        Role = new Role(){
+                //            Name="Name",UId="UId",Id =2, Description="Description"
+                //        }
+                //    }
                 }
             };
             var Response = await service.UpdateAsync(model.Id, dataInput); Assert.NotEqual(0, Response);
@@ -145,23 +145,23 @@ namespace Com.Danliris.Service.Auth.Test.Services
 
             Assert.True(vm.Validate(context).Count() > 0);
 
-            vm.roles = new List<RoleViewModel>()
-            {
-                new RoleViewModel()
-                {
-                    _id = 1,
-                },
-                new RoleViewModel()
-                {
-                    _id = 1
-                }
-            };
-            Assert.True(vm.Validate(context).Count() > 0);
+            //vm.roles = new List<RoleViewModel>()
+            //{
+            //    new RoleViewModel()
+            //    {
+            //        _id = 1,
+            //    },
+            //    new RoleViewModel()
+            //    {
+            //        _id = 1
+            //    }
+            //};
+            //Assert.True(vm.Validate(context).Count() > 0);
 
-            vm.roles = new List<RoleViewModel>()
-            {
-                new RoleViewModel()
-            };
+            //vm.roles = new List<RoleViewModel>()
+            //{
+            //    new RoleViewModel()
+            //};
             Assert.True(vm.Validate(context).Count() > 0);
         }
     }

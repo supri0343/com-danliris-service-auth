@@ -15,6 +15,7 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
         public bool isLocked { get; set; }
         public AccountProfileViewModel profile { get; set; }
         public List<RoleViewModel> roles { get; set; }
+        //public ICollection<Permission2ViewModel> permissions { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -62,7 +63,7 @@ namespace Com.Danliris.Service.Auth.Lib.ViewModels
 
 
             }
-            accountRoleError += "]";
+        accountRoleError += "]";
             
             if (Count > 0)
             {

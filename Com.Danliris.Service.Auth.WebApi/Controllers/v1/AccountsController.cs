@@ -20,10 +20,32 @@ namespace Com.Danliris.Service.Auth.WebApi.Controllers.v1
     [Authorize]
     public class AccountsController : BaseController<Account, AccountViewModel, IAccountService>
     {
+        public static readonly string ApiVersion = "1.0.0";
+        public readonly IAccountService _accountService;
 
-        public AccountsController(IIdentityService identityService, IValidateService validateService, IAccountService service, IMapper mapper) : base(identityService, validateService, service, mapper, "1.0.0")
+        public AccountsController(IIdentityService identityService, IValidateService validateService, IAccountService service, IMapper mapper, IAccountService _accountService) : base(identityService, validateService, service, mapper, "1.0.0")
         {
+            this._accountService = _accountService;
+        }
 
+        [HttpPut("changePass")]
+        public async Task<IActionResult> UpdatePass([FromBody] AccoutChangePassViewModel data)
+        {
+            try
+            {
+                VerifyUser();
+
+                await _accountService.UpdatePass(data.username, data.password);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, General.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(General.INTERNAL_ERROR_STATUS_CODE, Result);
+            }
         }
     }
 }

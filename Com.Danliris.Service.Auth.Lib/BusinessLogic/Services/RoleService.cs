@@ -30,9 +30,11 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
 
         public async Task<int> CreateAsync(Role model)
         {
+            model.Code = await GenerateCode();
             EntityExtension.FlagForCreate(model, IdentityService.Username, UserAgent);
             foreach(var item in model.Permissions)
             {
+                item.permission = 1;
                 EntityExtension.FlagForCreate(item, IdentityService.Username, UserAgent);
             }
             DbSet.Add(model);
@@ -56,7 +58,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
         {
             IQueryable<Role> query = DbSet.Include(x => x.Permissions).Where(x => !x.IsDeleted);
 
-            List<string> searchAttributes = new List<string>()
+           List<string> searchAttributes = new List<string>()
             {
                 "Code", "Name"
             };
@@ -68,7 +70,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
 
             List<string> selectedFields = new List<string>()
                 {
-                    "_id", "code", "name"
+                    "_id", "code", "name", "permissions","description"
                 };
 
             Dictionary<string, string> orderDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(order);
@@ -95,29 +97,44 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
             var data = await ReadByIdAsync(id);
 
             data.Code = model.Code;
+            //data.Code = await GenerateCode();
             data.Description = model.Description;
             data.Name = model.Name;
 
-            var updatedPermissions = model.Permissions.Where(x => data.Permissions.Any(y => y.Id == x.Id));
+            //var updatedPermissions = model.Permissions.Where(x => data.Permissions.Any(y => y.Id == x.Id));
             var addedPermissions = model.Permissions.Where(x => !data.Permissions.Any(y => y.Id == x.Id));
             var deletedPermissions = data.Permissions.Where(x => !model.Permissions.Any(y => y.Id == x.Id));
             
-            foreach (var item in updatedPermissions)
-            {
-                var permission = data.Permissions.SingleOrDefault(x => x.Id == item.Id);
+            //foreach (var item in updatedPermissions)
+            //{
+            //    var permission = data.Permissions.SingleOrDefault(x => x.Id == item.Id);
 
-                permission.Division = item.Division;
-                permission.permission = item.permission;
-                permission.Unit = item.Unit;
-                permission.UnitCode = item.UnitCode;
-                permission.UnitId = item.UnitId;
+            //    //permission.Division = item.Division;
+            //    //permission.permission = item.permission;
+            //    //permission.Unit = item.Unit;
+            //    //permission.UnitCode = item.UnitCode;
+            //    //permission.UnitId = item.UnitId;
+            //    permission.permission = item.permission;
+            //    permission.Code = item.Code;
+            //    permission.Menu = item.Menu;
+            //    permission.SubMenu = item.SubMenu;
+            //    permission.MenuName = item.MenuName;
 
-                EntityExtension.FlagForUpdate(permission, IdentityService.Username, UserAgent);
-            }
+            //    EntityExtension.FlagForUpdate(permission, IdentityService.Username, UserAgent);
+            //}
 
-            foreach(var item in addedPermissions)
+            //foreach(var item in addedPermissions)
+            //{
+            //    item.RoleId = id;
+            //    item.permission = 1;
+            //    EntityExtension.FlagForCreate(item, IdentityService.Username, UserAgent);
+            //    data.Permissions.Add(item);
+            //}
+
+            foreach(var item in model.Permissions)
             {
                 item.RoleId = id;
+                item.permission = 1;
                 EntityExtension.FlagForCreate(item, IdentityService.Username, UserAgent);
                 data.Permissions.Add(item);
             }
@@ -131,6 +148,17 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
            
             DbSet.Update(data);
             return await DbContext.SaveChangesAsync();
+        }
+
+        public async Task<string>GenerateCode()
+        {
+            var lastId = DbSet.Where(x => x.IsDeleted == false).Count();
+
+            var total = lastId + 1;
+
+            var Code = "RL" + total.ToString().PadLeft(3,'0');
+
+            return Code;
         }
 
         public bool CheckDuplicate(int id, string code)
