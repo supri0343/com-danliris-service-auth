@@ -94,60 +94,55 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
 
         public async Task<int> UpdateAsync(int id, Role model)
         {
-            var data = await ReadByIdAsync(id);
-
-            data.Code = model.Code;
-            //data.Code = await GenerateCode();
-            data.Description = model.Description;
-            data.Name = model.Name;
-
-            //var updatedPermissions = model.Permissions.Where(x => data.Permissions.Any(y => y.Id == x.Id));
-            var addedPermissions = model.Permissions.Where(x => !data.Permissions.Any(y => y.Id == x.Id));
-            var deletedPermissions = data.Permissions.Where(x => !model.Permissions.Any(y => y.Id == x.Id));
-            
-            //foreach (var item in updatedPermissions)
-            //{
-            //    var permission = data.Permissions.SingleOrDefault(x => x.Id == item.Id);
-
-            //    //permission.Division = item.Division;
-            //    //permission.permission = item.permission;
-            //    //permission.Unit = item.Unit;
-            //    //permission.UnitCode = item.UnitCode;
-            //    //permission.UnitId = item.UnitId;
-            //    permission.permission = item.permission;
-            //    permission.Code = item.Code;
-            //    permission.Menu = item.Menu;
-            //    permission.SubMenu = item.SubMenu;
-            //    permission.MenuName = item.MenuName;
-
-            //    EntityExtension.FlagForUpdate(permission, IdentityService.Username, UserAgent);
-            //}
-
-            //foreach(var item in addedPermissions)
-            //{
-            //    item.RoleId = id;
-            //    item.permission = 1;
-            //    EntityExtension.FlagForCreate(item, IdentityService.Username, UserAgent);
-            //    data.Permissions.Add(item);
-            //}
-
-            foreach(var item in model.Permissions)
+            int Updated = 0;
+            using (var transaction = this.DbContext.Database.BeginTransaction())
             {
-                item.RoleId = id;
-                item.permission = 1;
-                EntityExtension.FlagForCreate(item, IdentityService.Username, UserAgent);
-                data.Permissions.Add(item);
-            }
+                try
+                {
+                    var data = await ReadByIdAsync(id);
 
-            foreach (var item in deletedPermissions)
-            {
-                EntityExtension.FlagForDelete(item, IdentityService.Username, UserAgent, true);
-            }
+                    //Add permission if it didt exist
+                    foreach(var newPer in model.Permissions)
+                    {
+                        var existPer = data.Permissions.FirstOrDefault(a => a.Code == newPer.Code);
 
-            EntityExtension.FlagForUpdate(data, IdentityService.Username, UserAgent);
-           
-            DbSet.Update(data);
-            return await DbContext.SaveChangesAsync();
+                        if(existPer == null)
+                        {
+                            newPer.RoleId = id;
+                            newPer.permission = 1;
+                            EntityExtension.FlagForCreate(newPer, IdentityService.Username, UserAgent);
+                            data.Permissions.Add(newPer);
+                        }
+                    }
+
+                    //Remove permission if uncheck
+                    foreach (var oldPer in data.Permissions)
+                    {
+                        var existPer = model.Permissions.FirstOrDefault(a => a.Code == oldPer.Code);
+
+                        if (existPer == null)
+                        {
+                            EntityExtension.FlagForDelete(oldPer, IdentityService.Username, UserAgent, true);
+                        }
+                    }
+
+                    data.Code = model.Code;
+                    data.Description = model.Description;
+                    data.Name = model.Name;
+
+                    EntityExtension.FlagForUpdate(data, IdentityService.Username, UserAgent);
+
+                    DbSet.Update(data);
+                    Updated =  await DbContext.SaveChangesAsync();
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    throw new Exception(e.Message);
+                }
+            }
+            return Updated;
         }
 
         public async Task<string>GenerateCode()
