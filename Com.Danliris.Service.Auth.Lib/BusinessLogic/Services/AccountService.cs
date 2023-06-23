@@ -49,10 +49,10 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
             EntityExtension.FlagForDelete(model, IdentityService.Username, UserAgent, true);
             EntityExtension.FlagForDelete(model.AccountProfile, IdentityService.Username, UserAgent, true);
             //foreach (var item in model.AccountRoles)
-            foreach (var item in model.AccountRoles)
-            {
-                EntityExtension.FlagForDelete(item, IdentityService.Username, UserAgent, true);
-            }
+            //foreach (var item in model.AccountRoles)
+            //{
+            //    EntityExtension.FlagForDelete(item, IdentityService.Username, UserAgent, true);
+            //}
             DbSet.Update(model);
             return await DbContext.SaveChangesAsync();
 
