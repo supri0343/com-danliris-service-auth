@@ -192,15 +192,6 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                         //sheet.Cells["D" + index + ":D" + (index + b.Value - 1)].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Top;
 
                         //var startRow = b;
-                        for (var i = index; i <= index + b.Value - 1; i++)
-                        {
-                            sheet.Row(i).OutlineLevel = 1;
-                            sheet.Row(i).Collapsed = true;
-                        }
-
-                        index += b.Value;
-
-                       
 
                         //  sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
                     }
