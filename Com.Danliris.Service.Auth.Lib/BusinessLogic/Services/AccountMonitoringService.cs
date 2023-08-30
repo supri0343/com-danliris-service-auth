@@ -194,6 +194,7 @@ namespace Com.Danliris.Service.Auth.Lib.BusinessLogic.Services
                         //var startRow = b;
 
                         //  sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                        index += b.Value;
                     }
 
                     
